@@ -21,7 +21,7 @@ public class BoardController {
     @GetMapping("/add")
     public String board(Model model) {
         model.addAttribute("board", new Board());
-        return "board";
+        return "addBoard";
     }
 
     @PostMapping("/add")
