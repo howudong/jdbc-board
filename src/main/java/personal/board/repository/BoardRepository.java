@@ -1,0 +1,20 @@
+package personal.board.repository;
+
+import personal.board.domain.entity.Board;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface BoardRepository {
+    Long save(Board board);
+
+    List<Board> findAll();
+
+    Optional<Board> findById(Long id);
+
+    Board delete(Long id);
+
+    void update(Long id, Board board);
+
+    void clear();
+}
