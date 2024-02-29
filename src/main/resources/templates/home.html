@@ -8,14 +8,14 @@
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-<h1>Hello, world!</h1>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+<h1 align="center"> 게시판 프로젝트 </h1>
+<div class="d-grid gap-2 col-4 mx-auto">
+    <button type="button" class="btn btn-secondary" th:onclick="|location.href='@{/board/add}'|">게시글 작성</button>
+    <button type="button" class="btn btn-success" th:onclick="|location.href='@{/board/list}'|">전체 게시글 조회</button>
+</div>
 
-<button type="button" class="btn btn-info" th:onclick="|location.href='@{/login}'|">로그인</button>
-<button type="button" class="btn btn-primary" th:onclick="|location.href='@{/add}'|">회원가입</button>
-<button type="button" class="btn btn-secondary" th:onclick="|location.href='@{/board/add}'|">게시글 작성</button>
-<button type="button" class="btn btn-success" th:onclick="|location.href='@{/boards}'|">전체 게시글 조회</button>
 </body>
 </html>
