@@ -21,7 +21,7 @@
             <th scope="col">title</th>
             <th scope="col">
                 <button type="button" class="btn btn-success"
-                        th:onclick="|location.href='@{/board/add}'|">
+                        th:onclick="|location.href='@{/boards/write}'|">
                     게시글 작성
                 </button>
             </th>
@@ -34,7 +34,7 @@
             <td th:text="${board.title}">title</td>
             <td>
                 <button type="button" class="btn btn-success"
-                        th:onclick="|location.href='@{/board/{id}(id=${board.id})}'|">
+                        th:onclick="|location.href='@{/boards/{id}(id=${board.id})}'|">
                     게시글 보기
                 </button>
             </td>

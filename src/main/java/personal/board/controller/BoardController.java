@@ -13,24 +13,24 @@ import java.util.NoSuchElementException;
 
 @Controller
 @Slf4j
-@RequestMapping("board")
+@RequestMapping("boards")
 @RequiredArgsConstructor
 public class BoardController {
     private final BoardRepository boardRepository;
 
-    @GetMapping("/add")
-    public String addBoardForm(Model model) {
+    @GetMapping("/write")
+    public String boardForm(Model model) {
         model.addAttribute("board", new Board());
         return "addBoard";
     }
 
-    @PostMapping("/add")
-    public String add(@ModelAttribute Board board) {
+    @PostMapping("/write")
+    public String addBoard(@ModelAttribute Board board) {
         boardRepository.save(board);
         return "redirect:/";
     }
 
-    @RequestMapping()
+    @GetMapping
     public String boards(Model model) {
         List<Board> boards = boardRepository.findAll();
         model.addAttribute("boards", boards);
@@ -44,7 +44,6 @@ public class BoardController {
                         () -> new NoSuchElementException("없음"));
 
         model.addAttribute("board", board);
-
         return "board";
     }
 }
