@@ -10,6 +10,8 @@ public interface BoardRepository {
 
     List<Board> findAll();
 
+    List<Board> findPortion(int offset, int size);
+
     Optional<Board> findById(Long id);
 
     Board delete(Long id);

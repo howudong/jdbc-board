@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import personal.board.domain.entity.Board;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -85,4 +86,23 @@ class JbdcBoardRepositoryTest {
         assertThatThrownBy(
                 () -> boardRepository.delete(200L)).isInstanceOf(NoSuchElementException.class);
     }
+
+    @Test
+    @DisplayName("페이지 쿼리만큼 뜨면 성공")
+    void JbdcBoardRepositoryTest() {
+        //given
+        for (int i = 0; i < 12; i++) {
+            Board board = new Board("m" + i, "l" + i, "p" + i, "a");
+            boardRepository.save(board);
+        }
+        //when
+        int size = 3;
+        int offset = 1;
+        List<Board> portion = boardRepository.findPortion(1, size);
+        List<Long> boards = portion.stream().map(Board::getId).toList();
+        //then
+        assertThat(boards).hasSize(size);
+        assertThat(boards).containsExactly(9L, 8L, 7L);
+    }
+
 }

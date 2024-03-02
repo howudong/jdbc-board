@@ -124,4 +124,28 @@ public class JbdcBoardRepository implements BoardRepository {
             System.out.println("e.getMessage() = " + e.getMessage());
         }
     }
+
+    @Override
+    public List<Board> findPortion(int offset, int size) {
+        List<Board> boards = new ArrayList<>();
+        try (
+                Connection connection = dataSource.getConnection();
+                PreparedStatement ps = connection.prepareStatement(
+                        "SELECT id FROM board ORDER BY id DESC LIMIT ?,?");
+        ) {
+            ps.setInt(1, offset * size);
+            ps.setInt(2, size);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                long findId = Long.parseLong(rs.getString("id"));
+                Board findBoard = findById(findId).orElseThrow(
+                        () -> new RuntimeException("ERROR"));
+                boards.add(findBoard);
+            }
+        } catch (SQLException e) {
+            System.out.println("e.getMessage() = " + e.getMessage());
+        }
+        return boards;
+    }
 }

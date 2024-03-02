@@ -1,5 +1,6 @@
 package personal.board.controller;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,13 @@ import java.util.NoSuchElementException;
 public class BoardController {
     private final BoardRepository boardRepository;
 
+    @PostConstruct
+    public void createTestData() {
+        for (int i = 0; i < 50; i++) {
+            boardRepository.save(new Board("member" + i, "title" + i, "pwd" + i, "content" + i));
+        }
+    }
+
     @GetMapping("/write")
     public String boardForm(Model model) {
         model.addAttribute("board", new Board());
@@ -31,8 +39,10 @@ public class BoardController {
     }
 
     @GetMapping
-    public String boards(Model model) {
-        List<Board> boards = boardRepository.findAll();
+    public String boards(Model model,
+                         @RequestParam(defaultValue = "0", name = "offset") Integer offset,
+                         @RequestParam(defaultValue = "5", name = "size") Integer size) {
+        List<Board> boards = boardRepository.findPortion(offset, size);
         model.addAttribute("boards", boards);
         return "boards";
     }
@@ -45,5 +55,12 @@ public class BoardController {
 
         model.addAttribute("board", board);
         return "board";
+    }
+
+
+    @PostMapping("/{id}")
+    public String deleteBoard(@PathVariable("id") Long id) {
+        boardRepository.delete(id);
+        return "redirect:/boards";
     }
 }

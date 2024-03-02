@@ -16,7 +16,13 @@
     <p>작성자: <span th:text="${board.username}"></span></p>
     <p>내용: <span th:text="${board.content}"></span></p>
 
-    <button class="btn btn-secondary" type="button" th:onclick="history.back()">뒤로 가기</button>
+    <button class="btn btn-primary mx-3" type="button" th:onclick="history.back()">뒤로 가기</button>
+    <button class="btn btn-info mx-3" type="button" th:onclick="|location.href='@{/boards/write}'|">
+        게시글 수정
+    </button>
+    <form class="d-inline" th:action="@{/boards/{id}(id=${board.id})}" method="post">
+        <button class="btn btn-danger mx-3" type="submit">게시글 삭제</button>
+    </form>
 </div>
 </body>
 </html>

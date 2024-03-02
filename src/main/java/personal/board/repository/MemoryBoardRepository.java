@@ -51,4 +51,9 @@ public class MemoryBoardRepository implements BoardRepository {
         sequence = 0L;
         store.clear();
     }
+
+    @Override
+    public List<Board> findPortion(int offset, int size) {
+        return null;
+    }
 }

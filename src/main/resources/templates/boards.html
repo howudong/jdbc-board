@@ -41,4 +41,23 @@
         </tr>
         </tbody>
     </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination pagination-lg  justify-content-center">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <th:block th:each="board, boardStat : ${boards}">
+                <li class="page-item"><a class="page-link" th:href="@{/boards(offset=${boardStat.index})}"
+                                         th:text="${boardStat.count}">1</a></li>
+            </th:block>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </div>
+</body>
