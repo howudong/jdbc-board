@@ -6,8 +6,8 @@ import personal.board.domain.entity.Board;
 
 import java.util.*;
 
-@Repository
 @Slf4j
+@Repository
 public class MemoryBoardRepository implements BoardRepository {
     private final Map<Long, Board> store = new HashMap<>();
     private Long sequence = 0L;
